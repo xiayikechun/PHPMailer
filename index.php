@@ -1,6 +1,13 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+$MailArray["Host"]=$_REQUEST['host'];
+$MailArray["Fxyx"]=$_REQUEST['fxyx'];
+$MailArray["Fxyxmm"]=$_REQUEST['fxyxmm'];
+$MailArray["Fxrmc"]=$_REQUEST['fxrmc'];
+$MailArray["Sxyx"]=$_REQUEST['sxyx'];
+$MailArray["Yjzt"]=$_REQUEST['yjzt'];
+$MailArray["Yjnr"]=$_REQUEST['yjnr'];
 
 
 require 'PHPMailer/PHPMailer.php';
@@ -13,21 +20,21 @@ try {
     $mail->isSMTP();
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = 'ssl';
-    $mail->Host = 'smtp.exmail.qq.com';
+    $mail->Host = $MailArray["Host"];
     $mail->Port = 465;
 
-    $mail->Username = '发信邮箱';
-    $mail->Password = '发信邮箱密码';
-    $mail->setFrom($mail->Username, '发件人名称');
+    $mail->Username = $MailArray["Fxyx"];
+    $mail->Password = $MailArray["Fxyxmm"];
+    $mail->setFrom($mail->Username, $MailArray["Fxrmc"]);
 
-    $mail->addAddress('收信邮箱');
+    $mail->addAddress($MailArray["Sxyx"]);
 
     $mail->addAttachment('1.zip');//附件
     $mail->addAttachment('1.jpg');//图片
 
     $mail->isHTML(true);
-    $mail->Subject = '邮件标题';
-    $mail->Body = '<h1>邮件内容</h1>';
+    $mail->Subject = $MailArray["Yjzt"];
+    $mail->Body = $MailArray["Yjnr"];
     $mail->send();
     return true;
 } catch (Exception $e) {
